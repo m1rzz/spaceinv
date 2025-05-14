@@ -14,6 +14,6 @@ class Spaceship
 
     private:
         Texture2D image;
-        Vector2 position;
+        Vector2 pos;
 
 };

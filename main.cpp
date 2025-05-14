@@ -15,6 +15,8 @@ int main()
 
     while(WindowShouldClose() == false)
     {
+        game.HandleInput();
+
         BeginDrawing();
         ClearBackground(grey);
         game.Draw();
