@@ -23,7 +23,7 @@ void Laser::Update()
         if (pos.y > GetScreenHeight() || pos.y < 0)
         {    
             active = false;
-            cout << "laser inactive" << endl;
+            cout << "laser out of scope" << endl;
         }
     }
 }
