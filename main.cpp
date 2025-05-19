@@ -1,6 +1,7 @@
 #include <raylib.h>
 #include <iostream>
 #include "game.hpp"
+#include "barrier.hpp"
 
 int main()
 {
@@ -12,6 +13,7 @@ int main()
     SetTargetFPS(60);
 
     Game game;
+    Barrier barrier = Barrier({100, 100});
 
     while(WindowShouldClose() == false)
     {
@@ -21,6 +23,7 @@ int main()
         BeginDrawing();
         ClearBackground(grey);
         game.Draw();
+        barrier.Draw();
 
         EndDrawing();
     }
