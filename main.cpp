@@ -25,6 +25,7 @@ int main()
         EndDrawing();
     }
 
+    cout << "lfikdhnf";
     CloseWindow();
     return 0;
 
