@@ -16,13 +16,17 @@ class Game
         void HandleInput();
 
     private:
-        void DeleteLasers();
         void MoveAlienDown(int distance);
+        void AlienShootLaser();
+        void DeleteLasers();
         void MoveAlien();
         Spaceship spaceship;
         vector <Barrier> CreateBarrier();
         vector <Alien> CreateAliens();
+        vector <Laser> alienLaser;
         vector <Barrier> barriers;
         vector <Alien> aliens;
         int alienDirection;
+        float timeLastAlienLaser;
+        constexpr static float alienLaserInterval = 0.35;
 };

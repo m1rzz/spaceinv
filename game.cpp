@@ -7,6 +7,7 @@ Game::Game()
     barriers = CreateBarrier();
     aliens = CreateAliens();
     alienDirection = 1;
+    timeLastAlienLaser = 0.0;
 }
 
 Game::~Game()
@@ -17,11 +18,14 @@ Game::~Game()
 void Game::Update()
 {
     for (auto& laser: spaceship.lasers)
-    {
         laser.Update();
-    }   
 
     MoveAlien();
+    AlienShootLaser();
+
+    for (auto& laser : alienLaser)
+        laser.Update();
+
     DeleteLasers();
 }
 
@@ -30,19 +34,16 @@ void Game::Draw()
     spaceship.Draw();
 
     for (auto& laser: spaceship.lasers)
-    {
         laser.Draw();
-    }
 
     for (auto& barrier : barriers)
-    {
         barrier.Draw();
-    }
 
     for (auto& alien : aliens)
-    {
         alien.Draw();
-    }
+
+    for (auto& laser : alienLaser)
+        laser.Draw();
 }
 
 void Game::HandleInput()
@@ -64,6 +65,14 @@ void Game::DeleteLasers()
         else 
             ++iterator;
     }
+
+    for (auto iterator = alienLaser.begin(); iterator != alienLaser.end();)
+    {
+        if (!iterator -> active)
+            iterator = alienLaser.erase (iterator);
+        else 
+            ++iterator;
+    }
 }
 
 void Game::MoveAlienDown(int distance)
@@ -72,6 +81,24 @@ void Game::MoveAlienDown(int distance)
     {
         alien.pos.y += distance;
     }
+}
+
+void Game::AlienShootLaser()
+{
+    double currentTime = GetTime();
+
+    if (currentTime - timeLastAlienLaser >= alienLaserInterval && !aliens.empty())
+    {
+        int randIndex = GetRandomValue (0, aliens.size() - 1);
+        Alien& alien = aliens [randIndex];
+    
+        alienLaser.push_back (Laser({
+        alien.pos.x + alien.alienImages[alien.type - 1].width / 2,
+        alien.pos.y + alien.alienImages[alien.type - 1].height}, 6));
+        
+        timeLastAlienLaser = GetTime();
+    }
+
 }
 
 vector <Barrier> Game::CreateBarrier()
