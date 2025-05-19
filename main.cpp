@@ -1,7 +1,6 @@
 #include <raylib.h>
 #include <iostream>
 #include "game.hpp"
-#include "barrier.hpp"
 
 int main()
 {
@@ -9,26 +8,23 @@ int main()
     int windowWidth = 750;
     int windowHeight = 700;
 
-    InitWindow(windowWidth, windowHeight, "space invaders");
-    SetTargetFPS(60);
+    InitWindow (windowWidth, windowHeight, "space invaders");
+    SetTargetFPS (60);
 
     Game game;
-    Barrier barrier = Barrier({100, 100});
 
-    while(WindowShouldClose() == false)
+    while (WindowShouldClose() == false)
     {
         game.HandleInput();
         game.Update();
 
         BeginDrawing();
-        ClearBackground(grey);
+        ClearBackground (grey);
         game.Draw();
-        barrier.Draw();
 
         EndDrawing();
     }
 
-    cout << "lfikdhnf";
     CloseWindow();
     return 0;
 
