@@ -2,6 +2,7 @@ using namespace std;
 #pragma once
 #include "spaceship.hpp"
 #include "barrier.hpp"
+#include "alien.hpp"
 
 class Game
 {
@@ -16,7 +17,9 @@ class Game
 
     private:
         void DeleteLasers();
-        vector <Barrier> CreateBarrier();
         Spaceship spaceship;
+        vector <Barrier> CreateBarrier();
+        vector <Alien> CreateAliens();
         vector <Barrier> barriers;
+        vector <Alien> aliens;
 };

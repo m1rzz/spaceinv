@@ -5,10 +5,12 @@ using namespace std;
 Game::Game()
 {
     barriers = CreateBarrier();
+    aliens = CreateAliens();
 }
 
 Game::~Game()
 {
+    Alien :: UnloadImages();
 }
 
 void Game::Update()
@@ -31,7 +33,14 @@ void Game::Draw()
     }
 
     for (auto& barrier : barriers)
+    {
         barrier.Draw();
+    }
+
+    for (auto& alien : aliens)
+    {
+        alien.Draw();
+    }
 }
 
 void Game::HandleInput()
@@ -68,4 +77,30 @@ vector <Barrier> Game::CreateBarrier()
     }
     
     return barriers;
+}
+
+vector <Alien> Game::CreateAliens()
+{
+    vector <Alien> aliens;
+
+    for (int row = 0; row < 5; row++)
+    {
+        for (int col = 0; col < 11; col++)
+        {
+            int typeAlien;
+
+            if (row == 0)
+                typeAlien = 3;
+            else if (row == 1 || row == 2)
+                typeAlien = 2;
+            else 
+                typeAlien = 1;
+
+            float x = col * 55 + 75;
+            float y = row * 55 + 110;
+            aliens.push_back(Alien(typeAlien, {x, y}));
+        }
+    }
+
+    return aliens;
 }
