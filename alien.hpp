@@ -7,8 +7,8 @@ class Alien
         Alien (int type, Vector2 pos);
         static Texture2D alienImages [3];
         static void UnloadImages();
+        void Update(int direction);
         int GetType();
-        void Update();
         void Draw();
         Vector2 pos;
         int type;

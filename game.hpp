@@ -17,9 +17,12 @@ class Game
 
     private:
         void DeleteLasers();
+        void MoveAlienDown(int distance);
+        void MoveAlien();
         Spaceship spaceship;
         vector <Barrier> CreateBarrier();
         vector <Alien> CreateAliens();
         vector <Barrier> barriers;
         vector <Alien> aliens;
+        int alienDirection;
 };

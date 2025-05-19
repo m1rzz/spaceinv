@@ -6,6 +6,7 @@ Game::Game()
 {
     barriers = CreateBarrier();
     aliens = CreateAliens();
+    alienDirection = 1;
 }
 
 Game::~Game()
@@ -20,6 +21,7 @@ void Game::Update()
         laser.Update();
     }   
 
+    MoveAlien();
     DeleteLasers();
 }
 
@@ -64,6 +66,14 @@ void Game::DeleteLasers()
     }
 }
 
+void Game::MoveAlienDown(int distance)
+{
+    for (auto& alien : aliens)
+    {
+        alien.pos.y += distance;
+    }
+}
+
 vector <Barrier> Game::CreateBarrier()
 {
     int barrierWidth = Barrier::grid[0].size() * 3;
@@ -103,4 +113,22 @@ vector <Alien> Game::CreateAliens()
     }
 
     return aliens;
+}
+
+void Game :: MoveAlien()
+{
+   for (auto& alien : aliens)
+   {
+        if (alien.pos.x + alien.alienImages[alien.type - 1].width > GetScreenWidth())
+        {
+            alienDirection = -1;
+            MoveAlienDown(4);
+        } else if (alien.pos. x < 0)
+        {
+            alienDirection = 1;
+            MoveAlienDown(4);
+        }
+
+       alien.Update (alienDirection);
+   }
 }

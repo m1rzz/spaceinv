@@ -43,3 +43,8 @@ int Alien::GetType()
 {
     return type;
 }
+
+void Alien :: Update (int direction)
+{
+    pos.x += direction;
+}
