@@ -1,6 +1,6 @@
 #include "spaceship.hpp"
 
-Spaceship::Spaceship()
+Spaceship :: Spaceship()
 {
     image = LoadTexture("Graphics/spaceship.png");
     pos.x = (GetScreenWidth() - image.width) / 2;
@@ -9,36 +9,46 @@ Spaceship::Spaceship()
     lastShotTime = 0.0;
 }
 
-Spaceship::~Spaceship()
+Spaceship :: ~Spaceship()
 {
     UnloadTexture(image);
 }
 
 void Spaceship::Draw()
 {
-    DrawTextureV(image, pos, WHITE);
+    DrawTextureV (image, pos, WHITE);
 }
 
-void Spaceship::MoveLeft()
+void Spaceship :: MoveLeft()
 {
     pos.x -= 7;
+    
     if (pos.x < 0) 
         pos.x = 0;
 }
 
-void Spaceship::MoveRight()
+void Spaceship :: MoveRight()
 {
     pos.x += 7;
+
     if (pos.x > GetScreenWidth() - image.width) 
         pos.x = GetScreenWidth() - image.width;
 }
 
-void Spaceship::FireLaser()
+void Spaceship :: FireLaser()
 {
     if (GetTime() - lastShotTime >= 0.35)
     {
-        lasers.push_back(Laser({(pos.x + image.width / 2) - 2, pos.y}, -6));
+        lasers.push_back(Laser
+        ({(pos.x + image.width / 2) - 2, pos.y}, -6));
         lastShotTime = GetTime();
     }
 
+}
+
+Rectangle Spaceship :: getRect()
+{
+    return {pos. x, pos.y, 
+    float (image.width), 
+    float (image.height)};
 }

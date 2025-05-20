@@ -13,8 +13,8 @@ MysteryShip :: ~MysteryShip()
 
 void MysteryShip :: Spawn()
 {
-    pos.y = 90;
     int side = GetRandomValue (0, 1);
+    pos.y = 90;
 
     if (side == 0)
     {
@@ -27,6 +27,16 @@ void MysteryShip :: Spawn()
     }
     alive = true;
 
+}
+
+Rectangle MysteryShip :: getRect()
+{
+    if (alive)
+        return {pos.x, pos.y, 
+        float (image.width), 
+        float (image.height)};
+     else 
+        return {pos.x, pos.y, 0, 0};
 }
 
 void MysteryShip :: Update()

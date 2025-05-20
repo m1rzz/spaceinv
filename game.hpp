@@ -1,9 +1,9 @@
 using namespace std;
 #pragma once
-#include "spaceship.hpp"
-#include "barrier.hpp"
 #include "alien.hpp"
+#include "barrier.hpp"
 #include "mysteryship.hpp"
+#include "spaceship.hpp"
 
 class Game
 {
@@ -18,6 +18,7 @@ class Game
 
     private:
         void MoveAlienDown(int distance);
+        void CheckCollision();
         void AlienShootLaser();
         void DeleteLasers();
         void MoveAlien();

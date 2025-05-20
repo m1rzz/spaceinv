@@ -38,6 +38,7 @@ void Game::Update()
 
     DeleteLasers();
     mysteryship.Update();
+    CheckCollision();
 }
 
 void Game::Draw()
@@ -93,6 +94,39 @@ void Game::MoveAlienDown(int distance)
     for (auto& alien : aliens)
     {
         alien.pos.y += distance;
+    }
+}
+
+void Game::CheckCollision()
+{
+    for (auto& laser : spaceship.lasers)
+    {
+        auto iterator = aliens.begin();
+
+        while (iterator != aliens.end())
+        {
+            if (CheckCollisionRecs (iterator -> getRect(), laser.getRect()))
+            {
+                iterator = aliens.erase(iterator);
+                laser.active = false;
+            } else 
+                ++iterator;
+        }
+
+        for (auto& barrier : barriers)
+        {
+            auto iterator = barrier.pixels.begin();
+
+            while (iterator != barrier.pixels.end())
+            {
+                if (CheckCollisionRecs (iterator -> getRect(), laser.getRect()))
+                {
+                    iterator = barrier.pixels.erase(iterator);
+                    laser.active = false;
+                } else
+                    ++iterator;
+            }
+        }
     }
 }
 

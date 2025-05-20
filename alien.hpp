@@ -4,13 +4,16 @@
 class Alien
 {
     public:
+
         Alien (int type, Vector2 pos);
-        static Texture2D alienImages [3];
+        Rectangle getRect();
+        Vector2 pos;
+        static Texture2D alienImages[3];
         static void UnloadImages();
-        void Update(int direction);
+        void Update (int direction);
         int GetType();
         void Draw();
-        Vector2 pos;
         int type;
+        
     private:
 };

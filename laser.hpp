@@ -5,7 +5,8 @@ class Laser
 {
     public:
 
-        Laser(Vector2 pos, int speed);
+        Laser (Vector2 pos, int speed);
+        Rectangle getRect();
         void Update();
         void Draw();
         bool active;

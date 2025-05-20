@@ -44,6 +44,13 @@ int Alien::GetType()
     return type;
 }
 
+Rectangle Alien :: getRect()
+{
+    return {pos.x, pos.y, 
+    float (alienImages[type - 1].width), 
+    float (alienImages[type - 1].height)};
+}
+
 void Alien :: Update (int direction)
 {
     pos.x += direction;

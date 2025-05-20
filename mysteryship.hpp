@@ -4,15 +4,18 @@
 class MysteryShip
 {
     public:
+
         MysteryShip();
         ~MysteryShip();
         void Update();
         void Draw();
         void Spawn();
+        Rectangle getRect();
         bool alive;
         
     private:
-        Vector2 pos;
+
         Texture2D image;
+        Vector2 pos;
         int speed;
 };
