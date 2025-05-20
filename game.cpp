@@ -6,6 +6,7 @@ Game::Game()
 {
     barriers = CreateBarrier();
     aliens = CreateAliens();
+    lives = 3;
     alienDirection = 1;
     timeLastAlienLaser = 0.0;
     timeLastSpawn = 0.0f;
@@ -142,7 +143,14 @@ void Game::CheckCollision()
     for (auto& laser : alienLaser)
     {
         if (CheckCollisionRecs (laser.getRect(), spaceship.getRect()))
+        {
             laser.active = false;
+            lives--;
+
+            if (lives == 0)
+                GameOver();
+        }
+
 
         for (auto& barrier : barriers)
         {
@@ -158,6 +166,28 @@ void Game::CheckCollision()
                     ++iterator;
             }
         }
+    }
+
+    // alien collision w barriers
+
+    for (auto& alien : aliens)
+    {
+        for (auto& barrier : barriers)
+        {
+            auto iterator = barrier.pixels.begin();
+
+            while (iterator != barrier.pixels.end())
+            {
+                if (CheckCollisionRecs (iterator -> getRect(), alien.getRect()))
+                {
+                    iterator = barrier.pixels.erase(iterator);
+                } else 
+                    iterator++;
+            }
+        }
+
+        if (CheckCollisionRecs (alien.getRect(), spaceship.getRect()))
+            GameOver();
     }
 }
 
@@ -236,4 +266,9 @@ void Game :: MoveAlien()
 
        alien.Update (alienDirection);
    }
+}
+
+void Game::GameOver()
+{
+    cout << "game over" << endl;
 }

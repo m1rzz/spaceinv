@@ -22,6 +22,7 @@ class Game
         void AlienShootLaser();
         void DeleteLasers();
         void MoveAlien();
+        void GameOver();
         Spaceship spaceship;
         MysteryShip mysteryship;
         vector <Barrier> CreateBarrier();
@@ -29,9 +30,10 @@ class Game
         vector <Laser> alienLaser;
         vector <Barrier> barriers;
         vector <Alien> aliens;
+        int lives;
         int alienDirection;
+        float timeLastSpawn;
         float timeLastAlienLaser;
         float mysteryShipSpawnInteval;
-        float timeLastSpawn;
         constexpr static float alienLaserInterval = 0.35;
 };
