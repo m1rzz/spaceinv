@@ -99,6 +99,8 @@ void Game::MoveAlienDown(int distance)
 
 void Game::CheckCollision()
 {
+    // spaceship laser
+
     for (auto& laser : spaceship.lasers)
     {
         auto iterator = aliens.begin();
@@ -112,6 +114,35 @@ void Game::CheckCollision()
             } else 
                 ++iterator;
         }
+
+        for (auto& barrier : barriers)
+        {
+            auto iterator = barrier.pixels.begin();
+
+            while (iterator != barrier.pixels.end())
+            {
+                if (CheckCollisionRecs (iterator -> getRect(), laser.getRect()))
+                {
+                    iterator = barrier.pixels.erase(iterator);
+                    laser.active = false;
+                } else
+                    ++iterator;
+            }
+        }
+
+        if (CheckCollisionRecs (mysteryship.getRect(), laser.getRect()))
+        {
+            mysteryship.alive = false;
+            laser.active = false;
+        }
+    }
+
+    // alien laser
+
+    for (auto& laser : alienLaser)
+    {
+        if (CheckCollisionRecs (laser.getRect(), spaceship.getRect()))
+            laser.active = false;
 
         for (auto& barrier : barriers)
         {
