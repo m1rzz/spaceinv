@@ -15,6 +15,7 @@ class Game
         void Draw();
         void Update();
         void HandleInput();
+        bool running;
 
     private:
         void MoveAlienDown(int distance);
@@ -23,6 +24,8 @@ class Game
         void DeleteLasers();
         void MoveAlien();
         void GameOver();
+        void InitGame();
+        void Reset();
         Spaceship spaceship;
         MysteryShip mysteryship;
         vector <Barrier> CreateBarrier();

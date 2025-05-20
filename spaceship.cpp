@@ -22,7 +22,7 @@ void Spaceship::Draw()
 void Spaceship :: MoveLeft()
 {
     pos.x -= 7;
-    
+
     if (pos.x < 0) 
         pos.x = 0;
 }
@@ -51,4 +51,11 @@ Rectangle Spaceship :: getRect()
     return {pos. x, pos.y, 
     float (image.width), 
     float (image.height)};
+}
+
+void Spaceship :: Reset()
+{
+    pos.x = (GetScreenWidth() - image.width) / 2.0f;
+    pos.y = GetScreenHeight() - image.height;
+    lasers.clear();
 }

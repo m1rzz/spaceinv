@@ -14,11 +14,12 @@ class Spaceship
         void MoveLeft();
         void MoveRight();
         void FireLaser();
+        void Reset();
         Rectangle getRect();
         vector <Laser> lasers;
  
     private:
-    
+
         double lastShotTime;
         Texture2D image;
         Vector2 pos;
