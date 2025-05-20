@@ -3,6 +3,7 @@ using namespace std;
 #include "spaceship.hpp"
 #include "barrier.hpp"
 #include "alien.hpp"
+#include "mysteryship.hpp"
 
 class Game
 {
@@ -21,6 +22,7 @@ class Game
         void DeleteLasers();
         void MoveAlien();
         Spaceship spaceship;
+        MysteryShip mysteryship;
         vector <Barrier> CreateBarrier();
         vector <Alien> CreateAliens();
         vector <Laser> alienLaser;
@@ -28,5 +30,7 @@ class Game
         vector <Alien> aliens;
         int alienDirection;
         float timeLastAlienLaser;
+        float mysteryShipSpawnInteval;
+        float timeLastSpawn;
         constexpr static float alienLaserInterval = 0.35;
 };
