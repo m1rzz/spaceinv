@@ -20,7 +20,6 @@ Barrier::Barrier (Vector2 pos)
 {
     this -> pos = pos;
 
-
     for (unsigned int row = 0; row < grid.size(); ++row)
     {
         for (unsigned int col = 0; col < grid[0].size(); ++col)

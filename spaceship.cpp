@@ -48,6 +48,9 @@ void Spaceship :: FireLaser()
 
 Rectangle Spaceship :: getRect()
 {
+
+    // hitbox of the spaceship 
+    
     return {pos. x, pos.y, 
     float (image.width), 
     float (image.height)};
@@ -57,5 +60,6 @@ void Spaceship :: Reset()
 {
     pos.x = (GetScreenWidth() - image.width) / 2.0f;
     pos.y = GetScreenHeight() - image.height;
+
     lasers.clear();
 }

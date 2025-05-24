@@ -38,13 +38,13 @@ void Game::Update()
         CheckCollision();
 
     } else 
+    {
+        if (IsKeyDown (KEY_ENTER))
         {
-            if (IsKeyDown (KEY_ENTER))
-            {
-                Reset();
-                InitGame();
-            }
+            Reset();
+            InitGame();
         }
+    }
 }
 
 void Game::Draw()
