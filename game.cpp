@@ -12,7 +12,7 @@ Game::~Game()
     Alien :: UnloadImages();
 }
 
-void Game::Update()
+void Game :: Update()
 {
     if (running)
     {
@@ -47,7 +47,7 @@ void Game::Update()
     }
 }
 
-void Game::Draw()
+void Game :: Draw()
 {
     spaceship.Draw();
 
@@ -66,7 +66,7 @@ void Game::Draw()
     mysteryship.Draw();
 }
 
-void Game::HandleInput()
+void Game :: HandleInput()
 {
     if (running)
     {
@@ -79,8 +79,11 @@ void Game::HandleInput()
     }
 }
 
-void Game::DeleteLasers()
+void Game :: DeleteLasers()
 {
+
+    // iztriva lazeri za da free upne pamet 
+     
     for (auto iterator = spaceship.lasers.begin(); iterator != spaceship.lasers.end();)
     {
         if (!iterator -> active)
@@ -98,7 +101,7 @@ void Game::DeleteLasers()
     }
 }
 
-void Game::MoveAlienDown(int distance)
+void Game :: MoveAlienDown (int distance)
 {
     for (auto& alien : aliens)
     {
@@ -106,7 +109,7 @@ void Game::MoveAlienDown(int distance)
     }
 }
 
-void Game::CheckCollision()
+void Game :: CheckCollision()
 {
     // spaceship laser
 

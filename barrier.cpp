@@ -1,6 +1,6 @@
 #include "barrier.hpp"
 
-vector <vector <int> > Barrier::grid = {
+vector <vector <int> > Barrier :: grid = {
 {0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0},
 {0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0},
 {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0},
@@ -16,7 +16,7 @@ vector <vector <int> > Barrier::grid = {
 {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1}
 };
 
-Barrier::Barrier (Vector2 pos)
+Barrier :: Barrier (Vector2 pos)
 {
     this -> pos = pos;
 
@@ -35,7 +35,7 @@ Barrier::Barrier (Vector2 pos)
     }
 }
 
-void Barrier::Draw()
+void Barrier :: Draw()
 {
     for (auto& pixel : pixels)
         pixel.Draw();
