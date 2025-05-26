@@ -1,6 +1,8 @@
 #include <raylib.h>
 #include <string>
 #include "game.hpp"
+// #include "menu.hpp"
+// #include "options.hpp"
 
 using namespace std;
 
@@ -14,14 +16,6 @@ string LeadingZeroes (int num, int width)
 
 int main()
 {
-
-    float blinkTimer = 0;
-    bool showTxt = true;
-
-    Color grey = {29, 29, 27, 255};
-    Color red = {255, 60, 0, 255};
-    Color yellow = {243, 216, 63, 255};
-
     int windowWidth = 800;
     int windowHeight = 800;
     InitWindow (windowWidth, windowHeight, "Space Invaders");
@@ -30,8 +24,18 @@ int main()
     Font font = LoadFontEx ("Font/monogram.ttf", 64, 0, 0);
     Texture2D heartImage = LoadTexture ("Graphics/heart.png");
 
-    SetTargetFPS (60);
     Game game;
+    // Menu menu;
+    // Options options;
+    
+    float blinkTimer = 0;
+    bool showTxt = true;
+    
+    Color grey = {29, 29, 27, 255};
+    Color red = {255, 60, 0, 255};
+    Color yellow = {243, 216, 63, 255};
+    
+    SetTargetFPS (60);
 
     while (WindowShouldClose() == false)
     {

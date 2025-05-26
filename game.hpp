@@ -21,6 +21,8 @@ class Game
         int lives;
         int score;
         Music music;
+        void Reset();
+        Font font;
 
     private:
 
@@ -33,7 +35,6 @@ class Game
         void MoveAlien();
         void GameOver();
         void InitGame();
-        void Reset();
         MysteryShip mysteryship;
         Spaceship spaceship;
         vector <Barrier> CreateBarrier();
