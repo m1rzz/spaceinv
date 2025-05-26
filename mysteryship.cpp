@@ -27,11 +27,11 @@ void MysteryShip :: Spawn()
 
     if (side == 0)
     {
-        pos.x = 0;
+        pos.x = 25;
         speed = 3;
     } else 
     {
-        pos.x = GetScreenWidth() - image.width;
+        pos.x = GetScreenWidth() - image.width - 25;
         speed = -3;
     }
     alive = true;
@@ -56,7 +56,7 @@ void MysteryShip :: Update()
     {
         pos.x += speed;
 
-        if (pos.x > GetScreenWidth() - image.width || pos.x < 0)
+        if (pos.x > GetScreenWidth() - image.width - 25 || pos.x < 25)
             alive = false;
     }
 }

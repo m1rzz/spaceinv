@@ -285,11 +285,12 @@ void Game :: MoveAlien()
 
    for (auto& alien : aliens)
    {
-        if (alien.pos.x + alien.alienImages[alien.type - 1].width > GetScreenWidth())
+        if (alien.pos.x + 
+        alien.alienImages[alien.type - 1].width > GetScreenWidth() - 25)
         {
             alienDirection = -1;
             MoveAlienDown(4);
-        } else if (alien.pos. x < 0)
+        } if (alien.pos.x < 25)
         {
             alienDirection = 1;
             MoveAlienDown(4);

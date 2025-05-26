@@ -16,6 +16,7 @@ class Game
         void Update();
         void HandleInput();
         bool running;
+        int lives;
 
     private:
         void MoveAlienDown(int distance);
@@ -33,7 +34,6 @@ class Game
         vector <Laser> alienLaser;
         vector <Barrier> barriers;
         vector <Alien> aliens;
-        int lives;
         int alienDirection;
         float timeLastSpawn;
         float timeLastAlienLaser;
