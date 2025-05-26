@@ -1,6 +1,9 @@
 using namespace std;
+#include <fstream>
 #include <iostream>
 #include "game.hpp"
+
+using namespace std;
 
 Game :: Game()
 {
@@ -157,7 +160,7 @@ void Game :: CheckCollision()
             mysteryship.alive = false;
             laser.active = false;
             score += 500;
-            
+
             CheckHighscore();
         }
     }
@@ -210,6 +213,44 @@ void Game :: CheckCollision()
         if (CheckCollisionRecs (alien.getRect(), spaceship.getRect()))
             GameOver();
     }
+}
+
+void Game :: SaveHighscore (int highscore)
+{
+    // creates an instance of output stream class
+    ofstream highscoreFile ("highscore.txt");
+
+    if (highscoreFile.is_open())
+    {
+        highscoreFile << highscore;
+        highscoreFile.close();
+    } else 
+        cerr << "Failed to save highscore" << endl;
+
+        // cerr - standard error stream
+        // similar to cout
+        // displays error msgs immediately
+}
+
+int Game :: loadHighscore()
+{
+    int loadedHS = 0;
+
+    // ifstream - input file stream
+    // reads txt/binary files
+    // extracts data
+    // checks file states 
+    ifstream highscoreFile ("highscore.txt");
+    // the highscoreFile object reads from highscore.txt
+
+    if (highscoreFile.is_open())
+    {
+        highscoreFile >> loadedHS;
+        highscoreFile.close();
+    } else
+        cerr << "Failed to load highscore" << endl;
+
+    return loadedHS;
 }
 
 void Game :: AlienShootLaser()
@@ -314,7 +355,7 @@ void Game :: InitGame()
     running = true;
     lives = 3;
     score = 0;
-    highscore = 0;
+    highscore = loadHighscore();
     alienDirection = 1;
     timeLastAlienLaser = 0.0;
     timeLastSpawn = 0.0f;
@@ -324,7 +365,10 @@ void Game :: InitGame()
 void Game :: CheckHighscore()
 {
     if (score > highscore)
+    {
         highscore = score;
+        SaveHighscore (highscore);
+    }
 }
 
 void Game :: Reset()

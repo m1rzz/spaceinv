@@ -23,10 +23,11 @@ class Game
 
     private:
 
-        void MoveAlienDown(int distance);
+        void MoveAlienDown (int distance);
         void AlienShootLaser();
         void CheckHighscore();
         void CheckCollision();
+        void SaveHighscore (int highscore);
         void DeleteLasers();
         void MoveAlien();
         void GameOver();
@@ -40,6 +41,7 @@ class Game
         vector <Barrier> barriers;
         vector <Alien> aliens;
         int alienDirection;
+        int loadHighscore();
         float timeLastSpawn;
         float timeLastAlienLaser;
         float mysteryShipSpawnInteval;
