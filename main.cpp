@@ -14,6 +14,10 @@ string LeadingZeroes (int num, int width)
 
 int main()
 {
+
+    float blinkTimer = 0;
+    bool showTxt = true;
+
     Color grey = {29, 29, 27, 255};
     Color red = {255, 60, 0, 255};
     Color yellow = {243, 216, 63, 255};
@@ -35,6 +39,13 @@ int main()
         game.HandleInput();
         game.Update();
 
+        blinkTimer += GetFrameTime();
+        if (blinkTimer >= 0.7f)
+        {
+            showTxt = !showTxt;
+            blinkTimer = 0;
+        }
+
         BeginDrawing();
         ClearBackground (grey);
 
@@ -43,8 +54,11 @@ int main()
         
         if (game.running)
             DrawTextEx (font, "LEVEL 01", {570, 735}, 34, 2, yellow);
-        else 
-            DrawTextEx (font, "GAME OVER", {570, 735}, 34, 2, red);
+        else if (showTxt)
+        {
+            DrawTextEx (font, "PRESS ENTER TO RESTART", {350, 735}, 34, 2, yellow);
+            DrawTextEx (font, "GAME OVER", {75, 735}, 34, 2, red);
+        }
 
         float x = 50.0;
         for (int i =0; i < game.lives; i++)

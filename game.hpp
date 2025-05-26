@@ -48,4 +48,5 @@ class Game
         float mysteryShipSpawnInteval;
         constexpr static float alienLaserInterval = 0.35;
         Sound explosionSound;
+        Sound gameOverSound;
 };

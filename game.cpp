@@ -7,17 +7,16 @@ using namespace std;
 
 Game :: Game()
 {
-    music = LoadMusicStream ("Sounds/music.ogg");
+    music = LoadMusicStream ("Sounds/FranticLevel.wav");
     explosionSound = LoadSound ("Sounds/explosion.ogg");
-    PlayMusicStream (music);
+    gameOverSound = LoadSound ("Sounds/gameover.wav");
+    
     InitGame();
 }
 
 Game :: ~Game()
 {
-    // destruktur
     Alien :: UnloadImages();
-    UnloadMusicStream (music);
     UnloadSound (explosionSound);
 }
 
@@ -181,7 +180,9 @@ void Game :: CheckCollision()
             lives--;
 
             if (lives == 0)
+            {
                 GameOver();
+            }
         }
 
 
@@ -218,7 +219,9 @@ void Game :: CheckCollision()
         }
 
         if (CheckCollisionRecs (alien.getRect(), spaceship.getRect()))
+        {
             GameOver();
+        }
     }
 }
 
@@ -349,7 +352,8 @@ void Game :: MoveAlien()
 void Game :: GameOver()
 {
     // prekratqva igrata
-
+    PlaySound (gameOverSound);
+    StopMusicStream (music);
     running = false;
 }
 
@@ -357,6 +361,7 @@ void Game :: InitGame()
 {
 
     // zadava purvonachalni stoinosti pri puskane na igrata
+    PlayMusicStream (music);
     barriers = CreateBarrier();
     aliens = CreateAliens();
     running = true;
@@ -381,7 +386,6 @@ void Game :: CheckHighscore()
 void Game :: Reset()
 {
     // resetva vsichki obekti pri restartirane na igrata
-
     spaceship.Reset();
     aliens.clear();
     alienLaser.clear();
