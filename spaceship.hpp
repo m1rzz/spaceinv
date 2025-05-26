@@ -10,13 +10,13 @@ class Spaceship
 
         Spaceship();
         ~Spaceship();
-        void Draw();
-        void MoveLeft();
+        vector <Laser> lasers;
+        Rectangle getRect();
         void MoveRight();
         void FireLaser();
+        void MoveLeft();
         void Reset();
-        Rectangle getRect();
-        vector <Laser> lasers;
+        void Draw();
  
     private:
 

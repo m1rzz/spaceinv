@@ -6,8 +6,8 @@ class Pixel
     public:
 
         Pixel(Vector2 pos);
-        void Draw();
         Rectangle getRect();
+        void Draw();
 
     private:
     

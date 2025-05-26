@@ -11,10 +11,10 @@ Spaceship :: Spaceship()
 
 Spaceship :: ~Spaceship()
 {
-    UnloadTexture(image);
+    UnloadTexture (image);
 }
 
-void Spaceship::Draw()
+void Spaceship :: Draw()
 {
     DrawTextureV (image, pos, WHITE);
 }
@@ -39,8 +39,9 @@ void Spaceship :: FireLaser()
 {
     if (GetTime() - lastShotTime >= 0.35)
     {
-        lasers.push_back(Laser
+        lasers.push_back (Laser
         ({(pos.x + image.width / 2) - 2, pos.y}, -6));
+        
         lastShotTime = GetTime();
     }
 

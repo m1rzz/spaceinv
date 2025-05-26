@@ -2,17 +2,15 @@ using namespace std;
 #include <iostream>
 #include "game.hpp"
 
-Game::Game()
+Game :: Game()
 {
     //konstruktur
-
     InitGame();
 }
 
-Game::~Game()
+Game :: ~Game()
 {
     // destruktur
-
     Alien :: UnloadImages();
 }
 
@@ -54,7 +52,6 @@ void Game :: Update()
 void Game :: Draw()
 {
     // printira vsichki obekti 
-
     spaceship.Draw();
 
     for (auto& laser : spaceship.lasers)
@@ -77,11 +74,11 @@ void Game :: HandleInput()
     // razpoznava input ot klaviaturata na usera 
     if (running)
     {
-        if (IsKeyDown (KEY_LEFT) ) 
+        if (IsKeyDown (KEY_LEFT)) 
             spaceship.MoveLeft();
-        else if (IsKeyDown (KEY_RIGHT) ) 
+        else if (IsKeyDown (KEY_RIGHT)) 
             spaceship.MoveRight();
-        else if (IsKeyDown (KEY_SPACE) )
+        else if (IsKeyDown (KEY_SPACE))
             spaceship.FireLaser();
     }
 }
@@ -90,7 +87,6 @@ void Game :: DeleteLasers()
 {
 
     // iztriva lazeri za da free upne pamet 
-     
     for (auto iterator = spaceship.lasers.begin(); iterator != spaceship.lasers.end();)
     {
         if (!iterator -> active)
@@ -111,17 +107,13 @@ void Game :: DeleteLasers()
 void Game :: MoveAlienDown (int distance)
 {
     // dviji izvunzemnite nadolu
-
     for (auto& alien : aliens)
-    {
         alien.pos.y += distance;
-    }
 }
 
 void Game :: CheckCollision()
 {
     // spaceship laser
-
     for (auto& laser : spaceship.lasers)
     {
         auto iterator = aliens.begin();
@@ -130,8 +122,17 @@ void Game :: CheckCollision()
         {
             if (CheckCollisionRecs (iterator -> getRect(), laser.getRect()))
             {
+                if (iterator -> type == 1)
+                    score += 100;
+                else if (iterator -> type == 2)
+                    score += 200;
+                else if (iterator -> type == 3)
+                    score += 300;
+                CheckHighscore();
+
                 iterator = aliens.erase(iterator);
                 laser.active = false;
+
             } else 
                 ++iterator;
         }
@@ -155,11 +156,13 @@ void Game :: CheckCollision()
         {
             mysteryship.alive = false;
             laser.active = false;
+            score += 500;
+            
+            CheckHighscore();
         }
     }
 
     // alien laser
-
     for (auto& laser : alienLaser)
     {
         if (CheckCollisionRecs (laser.getRect(), spaceship.getRect()))
@@ -189,7 +192,6 @@ void Game :: CheckCollision()
     }
 
     // alien collision w barriers
-
     for (auto& alien : aliens)
     {
         for (auto& barrier : barriers)
@@ -199,9 +201,8 @@ void Game :: CheckCollision()
             while (iterator != barrier.pixels.end())
             {
                 if (CheckCollisionRecs (iterator -> getRect(), alien.getRect()))
-                {
                     iterator = barrier.pixels.erase(iterator);
-                } else 
+                else 
                     iterator++;
             }
         }
@@ -211,16 +212,15 @@ void Game :: CheckCollision()
     }
 }
 
-void Game::AlienShootLaser()
+void Game :: AlienShootLaser()
 {
     // interval ot vreme prez koito mogat da strelqt izvunzemnite
-
     double currentTime = GetTime();
 
     if (currentTime - timeLastAlienLaser >= alienLaserInterval && !aliens.empty())
     {
         int randIndex = GetRandomValue (0, aliens.size() - 1);
-        Alien& alien = aliens [randIndex];
+        Alien& alien = aliens[randIndex];
     
         alienLaser.push_back (Laser({
         alien.pos.x + alien.alienImages[alien.type - 1].width / 2,
@@ -235,7 +235,6 @@ vector <Barrier> Game :: CreateBarrier()
 {
 
     // suzdava 4 barieri na simetrichni intervali 
-
     int barrierWidth = Barrier :: grid[0].size() * 3;
     float gaps = (GetScreenWidth() - (4 * barrierWidth)) / 3;
 
@@ -243,7 +242,7 @@ vector <Barrier> Game :: CreateBarrier()
     {
         float offsetX = i * gaps + (barrierWidth * 1.5f);
         barriers.push_back (Barrier ({offsetX, 
-            float (GetScreenHeight() - 100)}));
+        float (GetScreenHeight() - 100)}));
     }
     
     return barriers;
@@ -251,8 +250,7 @@ vector <Barrier> Game :: CreateBarrier()
 
 vector <Alien> Game :: CreateAliens()
 {
-    // printira razlichnite vidove izvunzemni
-
+    // printira razlichnite vidove izvunzemni sprqmo reda na koito se namirat
     vector <Alien> aliens;
 
     for (int row = 0; row < 5; row++)
@@ -285,8 +283,8 @@ void Game :: MoveAlien()
 
    for (auto& alien : aliens)
    {
-        if (alien.pos.x + 
-        alien.alienImages[alien.type - 1].width > GetScreenWidth() - 25)
+        if (alien.pos.x + alien.alienImages[alien.type - 1].width
+        > GetScreenWidth() - 25)
         {
             alienDirection = -1;
             MoveAlienDown(4);
@@ -300,26 +298,33 @@ void Game :: MoveAlien()
    }
 }
 
-void Game::GameOver()
+void Game :: GameOver()
 {
     // prekratqva igrata
 
     running = false;
 }
 
-void Game::InitGame()
+void Game :: InitGame()
 {
 
     // zadava purvonachalni stoinosti pri puskane na igrata
-
     barriers = CreateBarrier();
     aliens = CreateAliens();
     running = true;
     lives = 3;
+    score = 0;
+    highscore = 0;
     alienDirection = 1;
     timeLastAlienLaser = 0.0;
     timeLastSpawn = 0.0f;
-    mysteryShipSpawnInteval = GetRandomValue(10, 20);
+    mysteryShipSpawnInteval = GetRandomValue (10, 20);
+}
+
+void Game :: CheckHighscore()
+{
+    if (score > highscore)
+        highscore = score;
 }
 
 void Game :: Reset()

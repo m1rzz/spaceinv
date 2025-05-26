@@ -1,9 +1,10 @@
-using namespace std;
 #pragma once
 #include "alien.hpp"
 #include "barrier.hpp"
 #include "mysteryship.hpp"
 #include "spaceship.hpp"
+
+using namespace std;
 
 class Game
 {
@@ -16,19 +17,23 @@ class Game
         void Update();
         void HandleInput();
         bool running;
+        int highscore;
         int lives;
+        int score;
 
     private:
+
         void MoveAlienDown(int distance);
-        void CheckCollision();
         void AlienShootLaser();
+        void CheckHighscore();
+        void CheckCollision();
         void DeleteLasers();
         void MoveAlien();
         void GameOver();
         void InitGame();
         void Reset();
-        Spaceship spaceship;
         MysteryShip mysteryship;
+        Spaceship spaceship;
         vector <Barrier> CreateBarrier();
         vector <Alien> CreateAliens();
         vector <Laser> alienLaser;

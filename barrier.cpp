@@ -1,8 +1,8 @@
 #include "barrier.hpp"
 
 // grida na barierite
-
-vector <vector <int> > Barrier :: grid = {
+vector <vector <int> > Barrier :: grid = 
+{
 {0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0},
 {0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0},
 {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0},
@@ -20,7 +20,6 @@ vector <vector <int> > Barrier :: grid = {
 
 
 // funkciq za risuvane na grida
-
 Barrier :: Barrier (Vector2 pos)
 {
     this -> pos = pos;
@@ -33,8 +32,8 @@ Barrier :: Barrier (Vector2 pos)
             {
                 float position_x = pos.x + col * 3;
                 float position_y = pos.y + row * 3 - 100;
-                Pixel pixel = Pixel({position_x, position_y});
-                pixels.push_back(pixel);
+                Pixel pixel = Pixel ({position_x, position_y});
+                pixels.push_back (pixel);
             }
         }
     }

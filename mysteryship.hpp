@@ -7,10 +7,10 @@ class MysteryShip
 
         MysteryShip();
         ~MysteryShip();
-        void Update();
-        void Draw();
-        void Spawn();
         Rectangle getRect();
+        void Update();
+        void Spawn();
+        void Draw();
         bool alive;
         
     private:
