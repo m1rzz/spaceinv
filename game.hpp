@@ -20,6 +20,7 @@ class Game
         int highscore;
         int lives;
         int score;
+        Music music;
 
     private:
 
@@ -46,4 +47,5 @@ class Game
         float timeLastAlienLaser;
         float mysteryShipSpawnInteval;
         constexpr static float alienLaserInterval = 0.35;
+        Sound explosionSound;
 };

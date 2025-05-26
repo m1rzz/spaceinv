@@ -7,11 +7,13 @@ Spaceship :: Spaceship()
     pos.y = GetScreenHeight() - image.height - 100;
 
     lastShotTime = 0.0;
+    laserSound = LoadSound ("Sounds/laser.ogg");
 }
 
 Spaceship :: ~Spaceship()
 {
     UnloadTexture (image);
+    UnloadSound (laserSound);
 }
 
 void Spaceship :: Draw()
@@ -41,8 +43,9 @@ void Spaceship :: FireLaser()
     {
         lasers.push_back (Laser
         ({(pos.x + image.width / 2) - 2, pos.y}, -6));
-        
+
         lastShotTime = GetTime();
+        PlaySound (laserSound);
     }
 
 }

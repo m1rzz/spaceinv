@@ -21,6 +21,7 @@ int main()
     int windowWidth = 800;
     int windowHeight = 800;
     InitWindow (windowWidth, windowHeight, "Space Invaders");
+    InitAudioDevice();
 
     Font font = LoadFontEx ("Font/monogram.ttf", 64, 0, 0);
     Texture2D heartImage = LoadTexture ("Graphics/heart.png");
@@ -30,6 +31,7 @@ int main()
 
     while (WindowShouldClose() == false)
     {
+        UpdateMusicStream (game.music);
         game.HandleInput();
         game.Update();
 
@@ -63,6 +65,7 @@ int main()
         EndDrawing();
     }
 
+    CloseAudioDevice();
     CloseWindow();
     return 0;
 

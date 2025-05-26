@@ -23,5 +23,6 @@ class Spaceship
         double lastShotTime;
         Texture2D image;
         Vector2 pos;
+        Sound laserSound;
 
 };

@@ -7,7 +7,9 @@ using namespace std;
 
 Game :: Game()
 {
-    //konstruktur
+    music = LoadMusicStream ("Sounds/music.ogg");
+    explosionSound = LoadSound ("Sounds/explosion.ogg");
+    PlayMusicStream (music);
     InitGame();
 }
 
@@ -15,6 +17,8 @@ Game :: ~Game()
 {
     // destruktur
     Alien :: UnloadImages();
+    UnloadMusicStream (music);
+    UnloadSound (explosionSound);
 }
 
 void Game :: Update()
@@ -125,6 +129,8 @@ void Game :: CheckCollision()
         {
             if (CheckCollisionRecs (iterator -> getRect(), laser.getRect()))
             {
+                PlaySound (explosionSound);
+
                 if (iterator -> type == 1)
                     score += 100;
                 else if (iterator -> type == 2)
@@ -162,6 +168,7 @@ void Game :: CheckCollision()
             score += 500;
 
             CheckHighscore();
+            PlaySound (explosionSound);
         }
     }
 
