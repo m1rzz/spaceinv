@@ -4,6 +4,9 @@ Texture2D Alien :: alienImages[3] = {};
 
 Alien::Alien(int type, Vector2 pos)
 {
+
+    // generira razlichnite vidove izvunzemni
+
     this -> type = type;
     this -> pos = pos;
 
@@ -30,11 +33,13 @@ Alien::Alien(int type, Vector2 pos)
 
 void Alien::Draw()
 {
+    // printira izvunzemnite na suotvetnite pozicii
     DrawTextureV (alienImages[type - 1], pos, WHITE);
 }
 
 void Alien::UnloadImages()
 {
+    
     for (int i = 0; i < 4; i++)
         UnloadTexture (alienImages[i]);
 }

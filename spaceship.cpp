@@ -4,7 +4,7 @@ Spaceship :: Spaceship()
 {
     image = LoadTexture ("Graphics/spaceship.png");
     pos.x = (GetScreenWidth() - image.width) / 2;
-    pos.y = GetScreenHeight() - image.height;
+    pos.y = GetScreenHeight() - image.height - 100;
 
     lastShotTime = 0.0;
 }
@@ -23,16 +23,16 @@ void Spaceship :: MoveLeft()
 {
     pos.x -= 7;
 
-    if (pos.x < 0) 
-        pos.x = 0;
+    if (pos.x < 25) 
+        pos.x = 25;
 }
 
 void Spaceship :: MoveRight()
 {
     pos.x += 7;
 
-    if (pos.x > GetScreenWidth() - image.width) 
-        pos.x = GetScreenWidth() - image.width;
+    if (pos.x > GetScreenWidth() - image.width - 25) 
+        pos.x = GetScreenWidth() - image.width - 25;
 }
 
 void Spaceship :: FireLaser()
@@ -59,7 +59,7 @@ Rectangle Spaceship :: getRect()
 void Spaceship :: Reset()
 {
     pos.x = (GetScreenWidth() - image.width) / 2.0f;
-    pos.y = GetScreenHeight() - image.height;
+    pos.y = GetScreenHeight() - image.height - 100;
 
     lasers.clear();
 }

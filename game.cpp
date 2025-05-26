@@ -4,11 +4,15 @@ using namespace std;
 
 Game::Game()
 {
+    //konstruktur
+
     InitGame();
 }
 
 Game::~Game()
 {
+    // destruktur
+
     Alien :: UnloadImages();
 }
 
@@ -49,6 +53,8 @@ void Game :: Update()
 
 void Game :: Draw()
 {
+    // printira vsichki obekti 
+
     spaceship.Draw();
 
     for (auto& laser : spaceship.lasers)
@@ -68,6 +74,7 @@ void Game :: Draw()
 
 void Game :: HandleInput()
 {
+    // razpoznava input ot klaviaturata na usera 
     if (running)
     {
         if (IsKeyDown (KEY_LEFT) ) 
@@ -103,6 +110,8 @@ void Game :: DeleteLasers()
 
 void Game :: MoveAlienDown (int distance)
 {
+    // dviji izvunzemnite nadolu
+
     for (auto& alien : aliens)
     {
         alien.pos.y += distance;
@@ -204,6 +213,8 @@ void Game :: CheckCollision()
 
 void Game::AlienShootLaser()
 {
+    // interval ot vreme prez koito mogat da strelqt izvunzemnite
+
     double currentTime = GetTime();
 
     if (currentTime - timeLastAlienLaser >= alienLaserInterval && !aliens.empty())
@@ -220,9 +231,12 @@ void Game::AlienShootLaser()
 
 }
 
-vector <Barrier> Game::CreateBarrier()
+vector <Barrier> Game :: CreateBarrier()
 {
-    int barrierWidth = Barrier::grid[0].size() * 3;
+
+    // suzdava 4 barieri na simetrichni intervali 
+
+    int barrierWidth = Barrier :: grid[0].size() * 3;
     float gaps = (GetScreenWidth() - (4 * barrierWidth)) / 3;
 
     for (int i = 0; i < 4; i++)
@@ -235,8 +249,10 @@ vector <Barrier> Game::CreateBarrier()
     return barriers;
 }
 
-vector <Alien> Game::CreateAliens()
+vector <Alien> Game :: CreateAliens()
 {
+    // printira razlichnite vidove izvunzemni
+
     vector <Alien> aliens;
 
     for (int row = 0; row < 5; row++)
@@ -263,6 +279,10 @@ vector <Alien> Game::CreateAliens()
 
 void Game :: MoveAlien()
 {
+
+    // dviji redovete s izvunzemni po x axis
+    // namestva gi v prozoreca na igrata, za da ne izlizat izvun scope-a
+
    for (auto& alien : aliens)
    {
         if (alien.pos.x + alien.alienImages[alien.type - 1].width > GetScreenWidth())
@@ -281,11 +301,16 @@ void Game :: MoveAlien()
 
 void Game::GameOver()
 {
+    // prekratqva igrata
+
     running = false;
 }
 
 void Game::InitGame()
 {
+
+    // zadava purvonachalni stoinosti pri puskane na igrata
+
     barriers = CreateBarrier();
     aliens = CreateAliens();
     running = true;
@@ -298,6 +323,8 @@ void Game::InitGame()
 
 void Game :: Reset()
 {
+    // resetva vsichki obekti pri restartirane na igrata
+
     spaceship.Reset();
     aliens.clear();
     alienLaser.clear();
