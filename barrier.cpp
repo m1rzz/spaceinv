@@ -1,6 +1,5 @@
 #include "barrier.hpp"
 
-// grida na barierite
 vector <vector <int> > Barrier :: grid = 
 {
 {0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0},
@@ -18,8 +17,6 @@ vector <vector <int> > Barrier :: grid =
 {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1}
 };
 
-
-// funkciq za risuvane na grida
 Barrier :: Barrier (Vector2 pos)
 {
     this -> pos = pos;
@@ -39,7 +36,6 @@ Barrier :: Barrier (Vector2 pos)
     }
 }
 
-// risuva grida
 void Barrier :: Draw()
 {
     for (auto& pixel : pixels)

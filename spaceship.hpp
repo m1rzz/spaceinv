@@ -1,8 +1,9 @@
-using namespace std;
 #pragma once
 #include <raylib.h>
 #include "laser.hpp"
 #include <vector>
+
+using namespace std;
 
 class Spaceship
 {
@@ -21,8 +22,8 @@ class Spaceship
     private:
 
         double lastShotTime;
+        Sound laserSound;
         Texture2D image;
         Vector2 pos;
-        Sound laserSound;
 
 };

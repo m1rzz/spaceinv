@@ -1,8 +1,6 @@
 #include <raylib.h>
 #include <string>
 #include "game.hpp"
-// #include "menu.hpp"
-// #include "options.hpp"
 
 using namespace std;
 
@@ -25,9 +23,7 @@ int main()
     Texture2D heartImage = LoadTexture ("Graphics/heart.png");
 
     Game game;
-    // Menu menu;
-    // Options options;
-    
+ 
     float blinkTimer = 0;
     bool showTxt = true;
     
@@ -75,8 +71,8 @@ int main()
         DrawTextEx (font, "SCORE", {75, 15}, 34, 2, yellow);
         DrawTextEx (font, scoreTxt.c_str(), {75, 40}, 34, 2, yellow);
 
-        DrawTextEx (font, "HIGH-SCORE", {555, 15}, 34, 2, yellow);
         string highscoreTxt = LeadingZeroes (game.highscore, 5);
+        DrawTextEx (font, "HIGH-SCORE", {555, 15}, 34, 2, yellow);
         DrawTextEx (font, highscoreTxt.c_str(), {645, 40}, 34, 2, yellow);
         
         game.Draw();

@@ -1,8 +1,8 @@
 #pragma once
 #include "alien.hpp"
 #include "barrier.hpp"
-#include "mysteryship.hpp"
 #include "spaceship.hpp"
+#include "mysteryship.hpp"
 
 using namespace std;
 
@@ -14,15 +14,14 @@ class Game
         Game();
         ~Game();
         void Draw();
+        void Reset();
         void Update();
         void HandleInput();
-        bool running;
-        int highscore;
+        Music music;
         int lives;
         int score;
-        Music music;
-        void Reset();
-        Font font;
+        int highscore;
+        bool running;
 
     private:
 
@@ -31,23 +30,23 @@ class Game
         void CheckHighscore();
         void CheckCollision();
         void SaveHighscore (int highscore);
+        int loadHighscore();
         void DeleteLasers();
         void MoveAlien();
         void GameOver();
         void InitGame();
-        MysteryShip mysteryship;
-        Spaceship spaceship;
         vector <Barrier> CreateBarrier();
         vector <Alien> CreateAliens();
         vector <Laser> alienLaser;
         vector <Barrier> barriers;
         vector <Alien> aliens;
-        int alienDirection;
-        int loadHighscore();
-        float timeLastSpawn;
+        Spaceship spaceship;
+        MysteryShip mysteryship;
         float timeLastAlienLaser;
         float mysteryShipSpawnInteval;
-        constexpr static float alienLaserInterval = 0.35;
+        float timeLastSpawn;
+        int alienDirection;
         Sound explosionSound;
         Sound gameOverSound;
+        constexpr static float alienLaserInterval = 0.35;
 };

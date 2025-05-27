@@ -52,9 +52,7 @@ void Spaceship :: FireLaser()
 
 Rectangle Spaceship :: getRect()
 {
-
     // hitbox of the spaceship 
-    
     return {pos. x, pos.y, 
     float (image.width), 
     float (image.height)};

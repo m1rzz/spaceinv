@@ -12,7 +12,7 @@ class Barrier
         void Draw();
         Vector2 pos;
         vector <Pixel> pixels;
-        static vector <vector <int> > grid;
+        static vector <vector <int>> grid;
 
     private:
 };

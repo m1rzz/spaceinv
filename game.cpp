@@ -1,4 +1,3 @@
-using namespace std;
 #include <fstream>
 #include <iostream>
 #include "game.hpp"
@@ -17,6 +16,7 @@ Game :: Game()
 Game :: ~Game()
 {
     Alien :: UnloadImages();
+
     UnloadSound (explosionSound);
 }
 
@@ -57,7 +57,6 @@ void Game :: Update()
 
 void Game :: Draw()
 {
-    // printira vsichki obekti 
     spaceship.Draw();
 
     for (auto& laser : spaceship.lasers)
@@ -77,7 +76,6 @@ void Game :: Draw()
 
 void Game :: HandleInput()
 {
-    // razpoznava input ot klaviaturata na usera 
     if (running)
     {
         if (IsKeyDown (KEY_LEFT)) 
@@ -91,8 +89,6 @@ void Game :: HandleInput()
 
 void Game :: DeleteLasers()
 {
-
-    // iztriva lazeri za da free upne pamet 
     for (auto iterator = spaceship.lasers.begin(); iterator != spaceship.lasers.end();)
     {
         if (!iterator -> active)
@@ -112,7 +108,6 @@ void Game :: DeleteLasers()
 
 void Game :: MoveAlienDown (int distance)
 {
-    // dviji izvunzemnite nadolu
     for (auto& alien : aliens)
         alien.pos.y += distance;
 }
@@ -219,9 +214,7 @@ void Game :: CheckCollision()
         }
 
         if (CheckCollisionRecs (alien.getRect(), spaceship.getRect()))
-        {
             GameOver();
-        }
     }
 }
 
@@ -236,22 +229,12 @@ void Game :: SaveHighscore (int highscore)
         highscoreFile.close();
     } else 
         cerr << "Failed to save highscore" << endl;
-
-        // cerr - standard error stream
-        // similar to cout
-        // displays error msgs immediately
 }
 
 int Game :: loadHighscore()
 {
     int loadedHS = 0;
-
-    // ifstream - input file stream
-    // reads txt/binary files
-    // extracts data
-    // checks file states 
     ifstream highscoreFile ("highscore.txt");
-    // the highscoreFile object reads from highscore.txt
 
     if (highscoreFile.is_open())
     {
@@ -265,7 +248,6 @@ int Game :: loadHighscore()
 
 void Game :: AlienShootLaser()
 {
-    // interval ot vreme prez koito mogat da strelqt izvunzemnite
     double currentTime = GetTime();
 
     if (currentTime - timeLastAlienLaser >= alienLaserInterval && !aliens.empty())
@@ -284,10 +266,8 @@ void Game :: AlienShootLaser()
 
 vector <Barrier> Game :: CreateBarrier()
 {
-
-    // suzdava 4 barieri na simetrichni intervali 
     int barrierWidth = Barrier :: grid[0].size() * 3;
-    float gaps = (GetScreenWidth() - (4 * barrierWidth)) / 3;
+    float gaps = (GetScreenWidth() - 4 * barrierWidth) / 3;
 
     for (int i = 0; i < 4; i++)
     {
@@ -301,7 +281,6 @@ vector <Barrier> Game :: CreateBarrier()
 
 vector <Alien> Game :: CreateAliens()
 {
-    // printira razlichnite vidove izvunzemni sprqmo reda na koito se namirat
     vector <Alien> aliens;
 
     for (int row = 0; row < 5; row++)
@@ -319,6 +298,7 @@ vector <Alien> Game :: CreateAliens()
 
             float x = col * 55 + 75;
             float y = row * 55 + 110;
+
             aliens.push_back(Alien(typeAlien, {x, y}));
         }
     }
@@ -328,14 +308,9 @@ vector <Alien> Game :: CreateAliens()
 
 void Game :: MoveAlien()
 {
-
-    // dviji redovete s izvunzemni po x axis
-    // namestva gi v prozoreca na igrata, za da ne izlizat izvun scope-a
-
    for (auto& alien : aliens)
    {
-        if (alien.pos.x + alien.alienImages[alien.type - 1].width
-        > GetScreenWidth() - 25)
+        if (alien.pos.x + alien.alienImages[alien.type - 1].width > GetScreenWidth() - 25)
         {
             alienDirection = -1;
             MoveAlienDown(4);
@@ -351,7 +326,6 @@ void Game :: MoveAlien()
 
 void Game :: GameOver()
 {
-    // prekratqva igrata
     PlaySound (gameOverSound);
     StopMusicStream (music);
     running = false;
@@ -359,18 +333,16 @@ void Game :: GameOver()
 
 void Game :: InitGame()
 {
-
-    // zadava purvonachalni stoinosti pri puskane na igrata
     PlayMusicStream (music);
+    highscore = loadHighscore();
     barriers = CreateBarrier();
     aliens = CreateAliens();
+    alienDirection = 1;
     running = true;
     lives = 3;
     score = 0;
-    highscore = loadHighscore();
-    alienDirection = 1;
-    timeLastAlienLaser = 0.0;
     timeLastSpawn = 0.0f;
+    timeLastAlienLaser = 0.0;
     mysteryShipSpawnInteval = GetRandomValue (10, 20);
 }
 
@@ -385,9 +357,8 @@ void Game :: CheckHighscore()
 
 void Game :: Reset()
 {
-    // resetva vsichki obekti pri restartirane na igrata
     spaceship.Reset();
-    aliens.clear();
     alienLaser.clear();
     barriers.clear();
+    aliens.clear();
 }

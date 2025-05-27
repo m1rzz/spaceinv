@@ -1,27 +1,18 @@
 #include "mysteryship.hpp"
 
-MysteryShip::MysteryShip()
+MysteryShip :: MysteryShip()
 {
-    // konstruktur
-    // png na mystery ship
-
     image = LoadTexture ("Graphics/mystery.png");
     alive = false;
 }
 
 MysteryShip :: ~MysteryShip()
 {
-    // destruktur
-    // osvobojdava pamet
-
     UnloadTexture (image);
 }
 
 void MysteryShip :: Spawn()
 {
-    // spawnva mystery shipa na sluchaen interval ot vreme
-    // ponqkoga ot lqvata strana, ponqkoga ot dqsnata
-
     int side = GetRandomValue (0, 1);
     pos.y = 90;
 
@@ -34,14 +25,13 @@ void MysteryShip :: Spawn()
         pos.x = GetScreenWidth() - image.width - 25;
         speed = -3;
     }
-    alive = true;
 
+    alive = true;
 }
 
 Rectangle MysteryShip :: getRect()
 {
     // hitbox
-    
     if (alive)
         return {pos.x, pos.y, 
         float (image.width), 
