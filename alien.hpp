@@ -14,7 +14,6 @@ class Alien
         static void UnloadImages();
         void Update (int direction);
         void Draw();
-        bool active = true;
         
     private:
 };

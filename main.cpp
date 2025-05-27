@@ -39,6 +39,7 @@ int main()
         game.HandleInput();
         game.Update();
 
+        // makes blinking text
         blinkTimer += GetFrameTime();
         if (blinkTimer >= 0.7f)
         {

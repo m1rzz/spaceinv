@@ -357,9 +357,8 @@ void Game :: InitGame()
     mysteryShipSpawnInteval = GetRandomValue (10, 20);
 }
 
-void Game :: Victory()
+bool Game :: Victory()
 {
-    
     if (alienLives <= 0)
     {
         PlaySound (victoryMusic);
@@ -368,6 +367,7 @@ void Game :: Victory()
         running = false;
     }
     
+    return true;
 }
 
 void Game :: CheckHighscore()

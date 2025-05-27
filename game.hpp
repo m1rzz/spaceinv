@@ -36,7 +36,7 @@ class Game
         void MoveAlien();
         void GameOver();
         void InitGame();
-        void Victory();
+        bool Victory();
         vector <Barrier> CreateBarrier();
         vector <Alien> CreateAliens();
         vector <Laser> alienLaser;
