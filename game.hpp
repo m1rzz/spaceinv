@@ -17,14 +17,15 @@ class Game
         void Reset();
         void Update();
         void HandleInput();
-        Music music;
+        int alienLives;
         int lives;
         int score;
         int highscore;
         bool running;
-
-    private:
-
+        Music music;
+        
+        private:
+        
         void MoveAlienDown (int distance);
         void AlienShootLaser();
         void CheckHighscore();
@@ -35,6 +36,7 @@ class Game
         void MoveAlien();
         void GameOver();
         void InitGame();
+        void Victory();
         vector <Barrier> CreateBarrier();
         vector <Alien> CreateAliens();
         vector <Laser> alienLaser;
@@ -46,6 +48,7 @@ class Game
         float mysteryShipSpawnInteval;
         float timeLastSpawn;
         int alienDirection;
+        Sound victoryMusic;
         Sound explosionSound;
         Sound gameOverSound;
         constexpr static float alienLaserInterval = 0.35;

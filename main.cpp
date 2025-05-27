@@ -54,14 +54,19 @@ int main()
         
         if (game.running)
             DrawTextEx (font, "LEVEL 01", {570, 735}, 34, 2, yellow);
-        else if (showTxt)
+        else if (game.lives == 0 && showTxt)
         {
             DrawTextEx (font, "PRESS ENTER TO RESTART", {350, 735}, 34, 2, yellow);
             DrawTextEx (font, "GAME OVER", {75, 735}, 34, 2, red);
+
+        } else if (game.alienLives == 0 && showTxt)
+        {
+            DrawTextEx (font, "VICTORY", {280, 325}, 70, 2, yellow);
+            DrawTextEx (font, "PRESS ENTER TO RESTART", {350, 735}, 34, 2, yellow);
         }
 
         float x = 50.0;
-        for (int i =0; i < game.lives; i++)
+        for (int i = 0; i < game.lives; i++)
         {
             DrawTextureV (heartImage, {x, 730}, WHITE);
             x += 50;
@@ -71,8 +76,8 @@ int main()
         DrawTextEx (font, "SCORE", {75, 15}, 34, 2, yellow);
         DrawTextEx (font, scoreTxt.c_str(), {75, 40}, 34, 2, yellow);
 
-        string highscoreTxt = LeadingZeroes (game.highscore, 5);
         DrawTextEx (font, "HIGH-SCORE", {555, 15}, 34, 2, yellow);
+        string highscoreTxt = LeadingZeroes (game.highscore, 5);
         DrawTextEx (font, highscoreTxt.c_str(), {645, 40}, 34, 2, yellow);
         
         game.Draw();

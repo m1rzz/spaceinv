@@ -42,7 +42,7 @@ void Spaceship :: FireLaser()
     if (GetTime() - lastShotTime >= 0.35)
     {
         lasers.push_back (Laser
-        ({(pos.x + image.width / 2) - 2, pos.y}, -6));
+        ({(pos.x + image.width / 2) - 2, pos.y}, - 6));
 
         lastShotTime = GetTime();
         PlaySound (laserSound);

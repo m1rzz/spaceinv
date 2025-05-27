@@ -1,14 +1,22 @@
 #include <fstream>
 #include <iostream>
+#include <raylib.h>
 #include "game.hpp"
+#include "alien.hpp"
 
 using namespace std;
 
 Game :: Game()
 {
-    music = LoadMusicStream ("Sounds/FranticLevel.wav");
+    music = LoadMusicStream ("Sounds/bgmusic.wav");
+    victoryMusic = LoadSound ("Sounds/winmusic.wav");
     explosionSound = LoadSound ("Sounds/explosion.ogg");
     gameOverSound = LoadSound ("Sounds/gameover.wav");
+    
+    SetMusicVolume (music, 0.2f);
+    SetSoundVolume (victoryMusic, 0.3f);
+    SetSoundVolume (explosionSound, 0.4f);
+    SetSoundVolume (gameOverSound, 0.4f);
     
     InitGame();
 }
@@ -133,8 +141,10 @@ void Game :: CheckCollision()
                     score += 300;
                 CheckHighscore();
 
+                alienLives--;
                 iterator = aliens.erase(iterator);
                 laser.active = false;
+                Victory();
 
             } else 
                 ++iterator;
@@ -220,7 +230,6 @@ void Game :: CheckCollision()
 
 void Game :: SaveHighscore (int highscore)
 {
-    // creates an instance of output stream class
     ofstream highscoreFile ("highscore.txt");
 
     if (highscoreFile.is_open())
@@ -300,6 +309,7 @@ vector <Alien> Game :: CreateAliens()
             float y = row * 55 + 110;
 
             aliens.push_back(Alien(typeAlien, {x, y}));
+
         }
     }
 
@@ -337,6 +347,7 @@ void Game :: InitGame()
     highscore = loadHighscore();
     barriers = CreateBarrier();
     aliens = CreateAliens();
+    alienLives = 55;
     alienDirection = 1;
     running = true;
     lives = 3;
@@ -344,6 +355,19 @@ void Game :: InitGame()
     timeLastSpawn = 0.0f;
     timeLastAlienLaser = 0.0;
     mysteryShipSpawnInteval = GetRandomValue (10, 20);
+}
+
+void Game :: Victory()
+{
+    
+    if (alienLives <= 0)
+    {
+        PlaySound (victoryMusic);
+        StopMusicStream (music);
+        
+        running = false;
+    }
+    
 }
 
 void Game :: CheckHighscore()
